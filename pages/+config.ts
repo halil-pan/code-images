@@ -8,7 +8,7 @@ import Layout from "../layouts/LayoutDefault.js";
 export default {
   // https://vike.dev/Layout
   Layout,
-
+  ssr: false,
   // https://vike.dev/head-tags
   title: "My Vike App",
   description: "Demo showcasing Vike",

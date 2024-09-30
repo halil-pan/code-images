@@ -1,49 +1,155 @@
 import "./style.css";
-
 import "./tailwind.css";
 import React from "react";
-import logoUrl from "../assets/logo.svg";
-import { Link } from "../components/Link.js";
+import {
+  Bird,
+  Book,
+  Bot,
+  Code2,
+  LifeBuoy,
+  Rabbit,
+  Settings,
+  Settings2,
+  Share,
+  SquareTerminal,
+  SquareUser,
+  Triangle,
+  Turtle,
+} from "lucide-react"
+
+import { Button } from "@/components/ui/button"
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+  TooltipProvider,
+} from "@/components/ui/tooltip"
+import { Badge } from "@/components/ui/badge"
 
 export default function LayoutDefault({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex max-w-5xl m-auto">
-      <Sidebar>
-        <Logo />
-        <Link href="/">Welcome</Link>
-        <Link href="/todo">Todo</Link>
-        <Link href="/star-wars">Data Fetching</Link>
-        {""}
-      </Sidebar>
-      <Content>{children}</Content>
-    </div>
-  );
-}
-
-function Sidebar({ children }: { children: React.ReactNode }) {
-  return (
-    <div id="sidebar" className="p-5 flex flex-col shrink-0 border-r-2 border-r-gray-200">
-      {children}
-    </div>
-  );
-}
-
-function Content({ children }: { children: React.ReactNode }) {
-  return (
-    <div id="page-container">
-      <div id="page-content" className="p-5 pb-12 min-h-screen">
-        {children}
+    <div className="grid h-screen w-full pl-[53px]">
+      <Sidebar />
+      <div className="flex flex-col">
+        <Header />
+        <Content>{children}</Content>
       </div>
     </div>
   );
 }
 
-function Logo() {
+function Sidebar() {
   return (
-    <div className="p-5 mb-2">
-      <a href="/">
-        <img src={logoUrl} height={64} width={64} alt="logo" />
-      </a>
-    </div>
+    <aside className="inset-y fixed  left-0 z-20 flex h-full flex-col border-r">
+      <div className="border-b p-2">
+        <Button variant="outline" size="icon" aria-label="Home">
+          <Triangle className="size-5 fill-foreground" />
+        </Button>
+      </div>
+      <nav className="grid gap-1 p-2">
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-lg bg-muted"
+                aria-label="Playground"
+              >
+                <SquareTerminal className="size-5" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="right" sideOffset={5}>
+              Playground
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="rounded-lg"
+          aria-label="Models"
+        >
+          <Bot className="size-5" />
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="rounded-lg"
+          aria-label="API"
+        >
+          <Code2 className="size-5" />
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="rounded-lg"
+          aria-label="Documentation"
+        >
+          <Book className="size-5" />
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="rounded-lg"
+          aria-label="Settings"
+        >
+          <Settings2 className="size-5" />
+        </Button>
+      </nav>
+      <nav className="mt-auto grid gap-1 p-2">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="mt-auto rounded-lg"
+          aria-label="Help"
+        >
+          <LifeBuoy className="size-5" />
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="mt-auto rounded-lg"
+          aria-label="Account"
+        >
+          <SquareUser className="size-5" />
+        </Button>
+      </nav>
+    </aside>
+  );
+}
+
+function Content({ children }: { children: React.ReactNode }) {
+  return (
+    <main className="grid flex-1 gap-4 overflow-auto p-4 md:grid-cols-2 lg:grid-cols-3">
+      {children}
+    </main>
+  );
+}
+
+function Header() {
+  return (
+    <header className="sticky top-0 z-10 flex h-[53px] items-center gap-1 border-b bg-background px-4">
+      <h1 className="text-xl font-semibold mr-1">Code Images</h1>
+      <Badge variant="outline">tw style</Badge>
+    </header>
   );
 }
