@@ -10,8 +10,8 @@ export default {
   Layout,
   ssr: false,
   // https://vike.dev/head-tags
-  title: "My Vike App",
-  description: "Demo showcasing Vike",
+  title: "tw code image",
+  description: "show your code with tw style",
 
   extends: vikeReact,
 } satisfies Config;
