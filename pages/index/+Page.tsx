@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-
-
 import { Share } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
@@ -12,10 +10,32 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
-import CodeHighlighter from "./CodeHighlighter"
+import CodeHighlighter, { languages } from "./CodeHighlighter"
+import { BundledLanguage } from "shiki"
+import html2canvas from 'html2canvas'
 
 export default function Dashboard() {
-  const [code, setCode] = useState('')
+  const [code, setCode] = useState('// Copy your code to here')
+  const [theme, setTheme] = useState('tw-light')
+  const [language, setLanguage] = useState<BundledLanguage>('javascript')
+  function exportCodeImage() {
+    const codeElement = document.querySelector(".shiki code") as HTMLElement;
+    codeElement && html2canvas(codeElement, {
+      width: codeElement.getBoundingClientRect().width + 24,
+      height: codeElement.getBoundingClientRect().height + 24,
+      x: -12,
+      y: -12,
+    }).then(canvas => {
+      canvas.style.display = 'none'
+      document.body.appendChild(canvas)
+      const image = canvas.toDataURL('image/png')
+      const a = document.createElement('a')
+      a.setAttribute('download', `code-image-${Date.now()}.png`)
+      a.setAttribute('href', image)
+      a.click()
+      canvas.remove()
+    });
+  }
   return (
     <>
       <div
@@ -27,15 +47,26 @@ export default function Dashboard() {
               Settings
             </legend>
             <div className="grid gap-3">
+              <Label htmlFor="role">Theme</Label>
+              <Select value={theme} onValueChange={setTheme}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a theme" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="tw-light">tw-light</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="grid gap-3">
               <Label htmlFor="role">Language</Label>
-              <Select defaultValue="system">
+              <Select value={language} onValueChange={value => setLanguage(value as BundledLanguage)}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select a language" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="javascript">javascript</SelectItem>
-                  <SelectItem value="typescript">typescript</SelectItem>
-                  <SelectItem value="vue">vue</SelectItem>
+                  {languages.map(lang => (
+                    <SelectItem key={lang} value={lang}>{lang}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
@@ -56,12 +87,13 @@ export default function Dashboard() {
         <Button
           variant="outline"
           size="sm"
-          className="text-sm absolute right-3 top-3"
+          className="text-sm absolute right-5 top-5 opacity-50 hover:opacity-100"
+          onClick={exportCodeImage}
         >
           <Share className="size-3.5" />
           Share
         </Button>
-        <CodeHighlighter className="w-full h-full" code={code} />
+        <CodeHighlighter className="w-full h-full" code={code} language={language} theme={theme} />
       </div>
     </>
   )
