@@ -2,11 +2,6 @@ import "./style.css";
 import "./tailwind.css";
 import React from "react";
 import {
-  Book,
-  Bot,
-  Code2,
-  LifeBuoy,
-  Settings2,
   SquareTerminal,
   SquareUser,
   Triangle,
@@ -20,14 +15,16 @@ import {
   TooltipProvider,
 } from "@/components/ui/tooltip"
 import { Badge } from "@/components/ui/badge"
+import { Toaster } from "@/components/ui/toaster"
 
 export default function LayoutDefault({ children }: { children: React.ReactNode }) {
   return (
-    <div className="grid h-screen w-full pl-[53px]">
+    <div className="grid h-screen w-full pl-[56px]">
       <Sidebar />
       <div className="flex flex-col">
         <Header />
         <Content>{children}</Content>
+        <Toaster />
       </div>
     </div>
   );
@@ -59,48 +56,8 @@ function Sidebar() {
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="rounded-lg"
-          aria-label="Models"
-        >
-          <Bot className="size-5" />
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="rounded-lg"
-          aria-label="API"
-        >
-          <Code2 className="size-5" />
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="rounded-lg"
-          aria-label="Documentation"
-        >
-          <Book className="size-5" />
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="rounded-lg"
-          aria-label="Settings"
-        >
-          <Settings2 className="size-5" />
-        </Button>
       </nav>
       <nav className="mt-auto grid gap-1 p-2">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="mt-auto rounded-lg"
-          aria-label="Help"
-        >
-          <LifeBuoy className="size-5" />
-        </Button>
         <Button
           variant="ghost"
           size="icon"
@@ -124,7 +81,7 @@ function Content({ children }: { children: React.ReactNode }) {
 
 function Header() {
   return (
-    <header className="sticky top-0 z-10 flex h-[53px] items-center gap-1 border-b bg-background px-4">
+    <header className="sticky top-0 z-10 flex h-[57px] items-center gap-1 border-b bg-background px-4">
       <h1 className="text-xl font-semibold mr-1">Code Images</h1>
       <Badge variant="outline">tw style</Badge>
     </header>
