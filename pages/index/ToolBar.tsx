@@ -6,12 +6,13 @@ import { useToast } from "@/hooks/use-toast"
 
 export default function ToolBar() {
   async function codeToCanvas() {
-    const codeElement = document.querySelector(".shiki code") as HTMLElement;
+    const codeElement = document.querySelector(".shiki") as HTMLElement;
     return codeElement && await html2canvas(codeElement, {
       width: codeElement.getBoundingClientRect().width + 24,
       height: codeElement.getBoundingClientRect().height + 24,
       x: -12,
       y: -12,
+      allowTaint: true,
     })
   }
   const { toast } = useToast()
@@ -36,6 +37,7 @@ export default function ToolBar() {
   }
   const [isCopying, setIsCopying] = useState(false)
   function copyCodeImage() {
+    // captureScreenshot();
     setIsCopying(true)
     setTimeout(() => {
       codeToCanvas().then(canvas => canvas.toBlob(function (blob) {
@@ -50,11 +52,11 @@ export default function ToolBar() {
     }, 300);
   }
   return (
-    <div className="absolute right-5 top-5">
+    <div className="flex justify-end w-full">
       <Button
         variant="outline"
         size="sm"
-        className="text-sm opacity-50 hover:opacity-100 mr-2"
+        className="text-sm opacity-50 mr-2"
         disabled={isCopying}
         onClick={copyCodeImage}
       >
@@ -66,7 +68,7 @@ export default function ToolBar() {
       <Button
         variant="outline"
         size="sm"
-        className="text-sm opacity-50 hover:opacity-100"
+        className="text-sm opacity-50"
         disabled={isExporting}
         onClick={exportCodeImage}
       >

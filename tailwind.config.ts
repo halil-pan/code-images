@@ -2,6 +2,9 @@ import type { Config } from "tailwindcss";
 import tailwindAnimate from "tailwindcss-animate";
 
 export default {
+  corePlugins: {
+    preflight: false,
+  },
   darkMode: ["class"],
   content: ["./{pages,layouts,components,src}/**/*.{html,js,jsx,ts,tsx,vue}"],
   theme: {

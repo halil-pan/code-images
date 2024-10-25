@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { languages } from "./CodeHighlighter"
+import ToolBar from "./ToolBar";
 
 export default function SettingForm({
   theme,
@@ -28,7 +29,7 @@ export default function SettingForm({
 }) {
   return (
     <div
-      className="relative hidden flex-col items-start gap-8 md:flex" x-chunk="dashboard-03-chunk-0"
+      className="relative hidden flex-col items-start gap-4 md:flex" x-chunk="dashboard-03-chunk-0"
     >
       <form className="grid w-full items-start gap-6">
         <fieldset className="grid gap-6 rounded-lg border p-4">
@@ -71,6 +72,7 @@ export default function SettingForm({
           </div>
         </fieldset>
       </form>
+      <ToolBar />
     </div>
   )
 }

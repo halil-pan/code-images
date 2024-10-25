@@ -1,3 +1,372 @@
+/*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+*,
+::before,
+::after {
+  box-sizing: border-box; /* 1 */
+  border-width: 0; /* 2 */
+  border-style: solid; /* 2 */
+  border-color: theme('borderColor.DEFAULT', currentColor); /* 2 */
+}
+
+::before,
+::after {
+  --tw-content: '';
+}
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
+*/
+
+html,
+:host {
+  line-height: 1.5; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  -moz-tab-size: 4; /* 3 */
+  tab-size: 4; /* 3 */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  webkit-tap-highlight-color: transparent; /* 7 */
+}
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+body {
+  margin: 0; /* 1 */
+  line-height: inherit; /* 2 */
+}
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+hr {
+  height: 0; /* 1 */
+  color: inherit; /* 2 */
+  border-top-width: 1px; /* 3 */
+}
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+abbr:where([title]) {
+  text-decoration: underline dotted;
+}
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/*
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
+*/
+
+code,
+kbd,
+samp,
+pre {
+  font-family: theme('fontFamily.mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace); /* 1 */
+  font-size: 1em; /* 4 */
+}
+
+/*
+Add the correct font size in all browsers.
+*/
+
+small {
+  font-size: 80%;
+}
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+table {
+  text-indent: 0; /* 1 */
+  border-color: inherit; /* 2 */
+  border-collapse: collapse; /* 3 */
+}
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-feature-settings: inherit; /* 1 */
+  font-variation-settings: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  font-weight: inherit; /* 1 */
+  line-height: inherit; /* 1 */
+  letter-spacing: inherit; /* 1 */
+  color: inherit; /* 1 */
+  margin: 0; /* 2 */
+  padding: 0; /* 3 */
+}
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+button,
+select {
+  text-transform: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+button,
+input:where([type='button']),
+input:where([type='reset']),
+input:where([type='submit']) {
+  -webkit-appearance: button; /* 1 */
+  background-color: transparent; /* 2 */
+  background-image: none; /* 2 */
+}
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+:-moz-focusring {
+  outline: auto;
+}
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+progress {
+  vertical-align: baseline;
+}
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+[type='search'] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+summary {
+  display: list-item;
+}
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+Reset default styling for dialogs.
+*/
+dialog {
+  padding: 0;
+}
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+textarea {
+  resize: vertical;
+}
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+input::placeholder,
+textarea::placeholder {
+  opacity: 1; /* 1 */
+  color: theme('colors.gray.400', #9ca3af); /* 2 */
+}
+
+/*
+Set the default cursor for buttons.
+*/
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+:disabled {
+  cursor: default;
+}
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+[hidden]:where(:not([hidden="until-found"])) {
+  display: none;
+}
+
+/* ======================================================================================================================== */
+
 /* Links */
 a {
   text-decoration: none;
@@ -15,7 +384,6 @@ a {
 /* Reset */
 body {
   margin: 0;
-  font-family: sans-serif;
 }
 
 * {
@@ -38,11 +406,276 @@ body.page-is-transitioning #page-content {
   src: url("../assets/Dank\ Mono\ Regular.otf");
 }
 
+:root {
+  --c-white: #ffffff;
+  --c-black: #000000;
+  --c-neutral: var(--c-black);
+  --c-neutral-inverse: var(--c-white)
+}
+
+:root {
+  --c-gray-1: #dddde3;
+  --c-gray-2: #e4e4e9;
+  --c-gray-3: #ebebef;
+  --c-gray-soft: rgba(142, 150, 170, .14);
+  --c-indigo-1: #3451b2;
+  --c-indigo-2: #3a5ccc;
+  --c-indigo-3: #5672cd;
+  --c-indigo-soft: rgba(100, 108, 255, .14);
+  --c-purple-1: #6f42c1;
+  --c-purple-2: #7e4cc9;
+  --c-purple-3: #8e5cd9;
+  --c-purple-soft: rgba(159, 122, 234, .14);
+  --c-green-1: #18794e;
+  --c-green-2: #299764;
+  --c-green-3: #30a46c;
+  --c-green-soft: rgba(16, 185, 129, .14);
+  --c-yellow-1: #915930;
+  --c-yellow-2: #946300;
+  --c-yellow-3: #9f6a00;
+  --c-yellow-soft: rgba(234, 179, 8, .14);
+  --c-red-1: #b8272c;
+  --c-red-2: #d5393e;
+  --c-red-3: #e0575b;
+  --c-red-soft: rgba(244, 63, 94, .14);
+  --c-sponsor: #db2777
+}
+
+:root {
+  --c-bg: #ffffff;
+  --c-bg-alt: #f6f6f7;
+  --c-bg-elv: #ffffff;
+  --c-bg-soft: #f6f6f7
+}
+
+:root {
+  --c-text-1: rgba(60, 60, 67);
+  --c-text-2: rgba(60, 60, 67, .78);
+  --c-text-3: rgba(60, 60, 67, .56)
+}
+
+:root {
+  --c-default-1: var(--c-gray-1);
+  --c-default-2: var(--c-gray-2);
+  --c-default-3: var(--c-gray-3);
+  --c-default-soft: var(--c-gray-soft);
+  --c-brand-1: var(--c-indigo-1);
+  --c-brand-2: var(--c-indigo-2);
+  --c-brand-3: var(--c-indigo-3);
+  --c-brand-soft: var(--c-indigo-soft);
+  --c-brand: var(--c-brand-1);
+  --c-tip-1: var(--c-brand-1);
+  --c-tip-2: var(--c-brand-2);
+  --c-tip-3: var(--c-brand-3);
+  --c-tip-soft: var(--c-brand-soft);
+  --c-note-1: var(--c-brand-1);
+  --c-note-2: var(--c-brand-2);
+  --c-note-3: var(--c-brand-3);
+  --c-note-soft: var(--c-brand-soft);
+  --c-success-1: var(--c-green-1);
+  --c-success-2: var(--c-green-2);
+  --c-success-3: var(--c-green-3);
+  --c-success-soft: var(--c-green-soft);
+  --c-important-1: var(--c-purple-1);
+  --c-important-2: var(--c-purple-2);
+  --c-important-3: var(--c-purple-3);
+  --c-important-soft: var(--c-purple-soft);
+  --c-warning-1: var(--c-yellow-1);
+  --c-warning-2: var(--c-yellow-2);
+  --c-warning-3: var(--c-yellow-3);
+  --c-warning-soft: var(--c-yellow-soft);
+  --c-danger-1: var(--c-red-1);
+  --c-danger-2: var(--c-red-2);
+  --c-danger-3: var(--c-red-3);
+  --c-danger-soft: var(--c-red-soft);
+  --c-caution-1: var(--c-red-1);
+  --c-caution-2: var(--c-red-2);
+  --c-caution-3: var(--c-red-3);
+  --c-caution-soft: var(--c-red-soft)
+}
+
+:root {
+  --code-line-height: 1.7;
+  --code-font-size: .875em;
+  --code-color: var(--c-brand-1);
+  --code-link-color: var(--c-brand-1);
+  --code-link-hover-color: var(--c-brand-2);
+  --code-bg: var(--c-default-soft);
+  --code-block-color: var(--c-text-2);
+  --code-block-bg: var(--c-bg-alt);
+  --code-block-divider-color: var(--c-gutter);
+  --code-lang-color: var(--c-text-3);
+  --code-line-highlight-color: var(--c-default-soft);
+  --code-line-number-color: var(--c-text-3);
+  --code-line-diff-add-color: var(--c-success-soft);
+  --code-line-diff-add-symbol-color: var(--c-success-1);
+  --code-line-diff-remove-color: var(--c-danger-soft);
+  --code-line-diff-remove-symbol-color: var(--c-danger-1);
+  --code-line-warning-color: var(--c-warning-soft);
+  --code-line-error-color: var(--c-danger-soft);
+  --code-copy-code-border-color: var(--c-divider);
+  --code-copy-code-bg: var(--c-bg-soft);
+  --code-copy-code-hover-border-color: var(--c-divider);
+  --code-copy-code-hover-bg: var(--c-bg);
+  --code-copy-code-active-text: var(--c-text-2);
+  --code-copy-copied-text-content: "Copied";
+  --code-tab-divider: var(--code-block-divider-color);
+  --code-tab-text-color: var(--c-text-2);
+  --code-tab-bg: var(--code-block-bg);
+  --code-tab-hover-text-color: var(--c-text-1);
+  --code-tab-active-text-color: var(--c-text-1);
+  --code-tab-active-bar-color: var(--c-brand-1);
+}
+
+:root {
+  --font-family-base: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-mono: "Dank Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-optical-sizing: auto
+}
+
+:root:where(:lang(zh)) {
+  --font-family-base: "Punctuation SC", "Inter", ui-sans-serif, system-ui, "PingFang SC", "Noto Sans CJK SC", "Noto Sans SC", "Heiti SC", "Microsoft YaHei", "DengXian", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+}
+
 .shiki,
 pre {
   display: block;
   padding: 12px;
   border-radius: 0.5em;
   overflow-x: auto;
-  font-family: "Dank Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: var(--font-family-mono);
+}
+pre,code {
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none
+}
+
+pre {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  background: transparent;
+  overflow-x: auto
+}
+
+code {
+  display: block;
+  padding: 24px;
+  width: fit-content;
+  min-width: 100%;
+  line-height: var(--code-line-height);
+  font-size: var(--code-font-size);
+  color: var(--code-block-color);
+  transition: color .5s
+}
+
+code .line {
+  position: relative;
+}
+
+code .highlighted {
+  transition: background-color .5s;
+  width: 100%;
+  display: inline-block;
+}
+
+code .highlighted:before {
+  content: "";
+  position: absolute;
+  left: -24px;
+  width: calc(100% + 48px);
+  height: 100%;
+  background-color: var(--code-line-highlight-color);
+}
+
+code .highlighted.error:before {
+  background-color: var(--code-line-error-color)
+}
+
+code .highlighted.warning:before {
+  background-color: var(--code-line-warning-color)
+}
+
+[class*=language-] .has-focused .line:not(.focused) {
+  filter: blur(.095rem);
+  opacity: .4;
+  transition: filter .35s,opacity .35s
+}
+
+[class*=language-] .has-focused .line:not(.focused) {
+  opacity: .7;
+  transition: filter .35s,opacity .35s
+}
+
+[class*=language-]:hover .has-focused .line:not(.focused) {
+  filter: blur(0);
+  opacity: 1
+}
+
+code .diff {
+  width: 100%;
+  display: inline-block;
+}
+
+code .diff:before {
+  position: absolute;
+  left: -24px;
+  width: calc(100% + 48px);
+  padding-left: 8px;
+}
+
+code .diff.remove {
+  opacity: .7
+}
+
+code .diff.remove:before {
+  content: " ";
+  color: var(--code-line-diff-remove-symbol-color);
+  background-color: var(--code-line-diff-remove-color);
+}
+
+code .diff.add:before {
+  content: " ";
+  color: var(--code-line-diff-add-symbol-color);
+  background-color: var(--code-line-diff-add-color);
+}
+
+div[class*=language-].line-numbers-mode {
+  padding-left: 32px
+}
+
+.line-numbers-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  border-right: 1px solid var(--code-block-divider-color);
+  padding-top: 20px;
+  width: 32px;
+  text-align: center;
+  font-family: var(--font-family-mono);
+  line-height: var(--code-line-height);
+  font-size: var(--code-font-size);
+  color: var(--code-line-number-color);
+  transition: border-color .5s,color .5s
+}
+
+.highlighted-word {
+  background-color: var(--c-bg-soft);
+  border: 1px solid #c2c2c4;
+  padding: 1px 3px;
+  margin: -1px -3px;
+  border-radius: 4px;
 }

@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { type BundledLanguage, type ThemeRegistrationRaw } from 'shiki'
+import { ShikiTransformer, type BundledLanguage, type ThemeRegistrationRaw } from 'shiki'
 import { bundledLanguages, createHighlighter, HighlighterGeneric, BundledTheme } from 'shiki'
+import {
+  transformerNotationDiff,
+  transformerNotationHighlight,
+  transformerNotationWordHighlight,
+  transformerNotationFocus,
+  transformerNotationErrorLevel
+} from '@shikijs/transformers'
 import twLight from '../../lib/highlight-theme/tw-light.json'
+import { cn } from '@/lib/utils'
 
 interface CodeHighlighterProps {
   code: string;
@@ -29,8 +37,15 @@ export default function CodeHighlighter({ code, language, theme, className }: Co
     }
     setHtml(highlighter.codeToHtml(code, {
       lang: language || 'javascript',
-      theme: theme || 'tw-light'
+      theme: theme || 'tw-light',
+      transformers: [
+        (transformerNotationDiff()) as ShikiTransformer,
+        (transformerNotationHighlight()) as ShikiTransformer,
+        (transformerNotationWordHighlight()) as ShikiTransformer,
+        (transformerNotationFocus()) as ShikiTransformer,
+        (transformerNotationErrorLevel()) as ShikiTransformer
+      ]
     }))
   }, [code, language, theme, highlighter])
-  return <div className={className} dangerouslySetInnerHTML={{ __html: html }} />
+  return <div className={cn([className, `language-${language}`])} dangerouslySetInnerHTML={{ __html: html }} />
 }
